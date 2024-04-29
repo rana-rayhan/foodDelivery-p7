@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNewProduct } from "../components/Redux/ProductSlice";
+import { addNewProduct, baseUrl } from "../components/Redux/ProductSlice";
 
 const useProduct = (data) => {
   const [isLoading, setLoading] = useState(null);
@@ -8,7 +8,7 @@ const useProduct = (data) => {
   const dispatch = useDispatch();
 
   const addProduct = async (data) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/product`, {
+    const response = await fetch(`${baseUrl}/product`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
