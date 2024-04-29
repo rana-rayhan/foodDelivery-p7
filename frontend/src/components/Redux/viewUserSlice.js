@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { baseUrl } from "./ProductSlice";
 
 // step 3: fetch data method if needed
 export const fetchUsers = createAsyncThunk("viewUser/fetchUsers", async () => {
   try {
-    const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/`);
+    const res = await axios.get(`${baseUrl}/user/`);
     return res.data;
   } catch (error) {
     throw error;

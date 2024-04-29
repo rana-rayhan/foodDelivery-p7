@@ -8,7 +8,7 @@ const useProduct = (data) => {
   const dispatch = useDispatch();
 
   const addProduct = async (data) => {
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/product`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

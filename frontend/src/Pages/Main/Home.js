@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GrPrevious, GrNext } from "react-icons/gr";
+import toast, { Toaster } from "react-hot-toast";
 
 import { fetchProduct } from "../../components/Redux/ProductSlice";
 import ProductCard from "../Products/ProductCard";
@@ -15,7 +16,17 @@ const Home = () => {
     (el) => el.category === "Vagetables",
     []
   );
-
+  if (isLoading) {
+    toast.success("Loading...", {
+      style: {
+        color: "#000",
+        fontSize: "25px",
+        minWidth: "250px",
+      },
+    });
+  } else {
+    toast.dismiss();
+  }
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,7 +47,7 @@ const Home = () => {
         {/* Left section */}
         <div className="md:w-1/2">
           <div className="flex gap-3 bg-slate-300 w-36 px-2 items-center rounded-full">
-            <p className="text-sm font-medium text-slate-900 ">Bike Delivery</p>
+            <p className="text-sm font-medium text-slate-900 ">Free Delivery</p>
             <img
               className="h-7"
               src="https://cdn-icons-png.flaticon.com/512/171/171253.png"
@@ -63,9 +74,6 @@ const Home = () => {
         </div>
         {/* Right section  product card*/}
         <div className="md:w-1/2 flex flex-wrap gap-5 p-4 justify-center">
-          {isLoading && (
-            <p className=" text-red-500 flex text-1xl">Loading...</p>
-          )}
           {error && <p className=" text-red-500 text-1xl">{error}</p>}
           {productList.map((el) => {
             return (
@@ -80,11 +88,6 @@ const Home = () => {
           <h2 className="font-bold text-2xl text-slate-800 mb-4">
             Fresh Vegetables
           </h2>
-          <div className="ml-6 mb-4">
-            {isLoading && (
-              <p className=" text-red-500 text-2xl flex text-1xl">Loading...</p>
-            )}
-          </div>
           <div className="ml-auto flex gap-4">
             <button
               onClick={preveProduct}
@@ -111,11 +114,7 @@ const Home = () => {
         </div>
       </div>
       <AllProduct heading={"Your Product"} />
-      <div className="ml-6 mb-4">
-        {isLoading && (
-          <p className=" text-red-500 text-2xl flex text-1xl">Loading...</p>
-        )}
-      </div>
+      <Toaster />
     </div>
   );
 };

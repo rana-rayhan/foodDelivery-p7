@@ -7,7 +7,7 @@ import { ImageToBase64 } from "../../Utility/ImageToBase64";
 import useSingUp from "../../hooks/useSignup";
 
 const Signup = () => {
-  const { singUp, error } = useSingUp();
+  const { singUp, error, isLoading } = useSingUp();
   //
   // Getting user data
   const [data, setData] = useState({
@@ -44,8 +44,6 @@ const Signup = () => {
   //
   //
   // Handle form submit
-  // console.log(process.env.REACT_APP_BASE_URL);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { firstname, lastname, email, password, confirmPassword } = data;
@@ -77,7 +75,7 @@ const Signup = () => {
     <div className="p-3 md:p-4">
       <div className="w-full max-w-sm bg-white m-auto flex flex-col p-4">
         <h1 className="text-center text-2xl font-bold">Sign Up</h1>
-        
+
         <div className="w-20 h-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto relative">
           <img
             src={data.image ? data.image : loginSignup}
@@ -106,7 +104,13 @@ const Signup = () => {
           onSubmit={handleSubmit}
           encType="multipart/form-data"
           className="w-full py-3 flex flex-col"
-        > {error && <p className="flex justify-center items-center text-red-600">{error}</p>}
+        >
+          {" "}
+          {error && (
+            <p className="flex justify-center items-center text-red-600">
+              {error}
+            </p>
+          )}
           <label htmlFor="firstname"> First Name:</label>
           <input
             onChange={handleData}
@@ -125,7 +129,7 @@ const Signup = () => {
             className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded
             focus-within:outline-blue-300"
           />
-          <label htmlFor="email"> Email:</label> 
+          <label htmlFor="email"> Email:</label>
           <input
             onChange={handleData}
             value={data.email}
@@ -173,11 +177,12 @@ const Signup = () => {
             </span>
           </div>
           <button
+            disabled={isLoading}
             type="submit"
             className="max-w-[120px] w-full bg-red-500 hover:bg-red-600
             cursor-pointer m-auto text-white py-1 rounded-full mt-4 text-center font-medium"
           >
-            Sign Up
+            {isLoading ? "Signup..." : "Signup"}
           </button>
         </form>
         <p className="text-sm">

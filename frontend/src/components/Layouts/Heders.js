@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FaUserCircle, FaCartPlus } from "react-icons/fa";
+import { FaCartPlus, FaUserCircle } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../Redux/UserSlice";
@@ -33,9 +33,9 @@ const Headers = () => {
         <Link to="/">
           <div className="h-10">
             <span className="h-full text-3xl text-orange-600 ml-2 font-bold">
-              RYAN
+              Fresh
             </span>
-            <span className="ml-2 font-bold text-slate-500">is here</span>{" "}
+            <span className="ml-2 font-bold text-slate-500">vegetable</span>{" "}
           </div>
         </Link>
         {/* start cart & user logo */}

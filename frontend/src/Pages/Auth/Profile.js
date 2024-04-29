@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { baseUrl } from "../../components/Redux/ProductSlice";
 
 const Profile = () => {
   const location = useLocation();
@@ -36,7 +37,7 @@ const Profile = () => {
     e.preventDefault();
 
     await axios.put(
-      `${process.env.REACT_APP_BASE_URL}/user/${user._id}`,
+      `${baseUrl}/user/${user._id}`,
       formData
     );
     navigate("/users");

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../components/Redux/ProductSlice";
 
 const useSingUp = () => {
   const [isLoading, setLoading] = useState(null);
@@ -9,14 +10,11 @@ const useSingUp = () => {
   const singUp = async (data) => {
     setLoading(true);
     setError(null);
-    const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/user/signup`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${baseUrl}/user/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
     //user data
     const userData = await response.json();
     if (!response.ok) {

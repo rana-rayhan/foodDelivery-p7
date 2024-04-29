@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+export const baseUrl = process.env.REACT_APP_API_URL;
 
 // fetch product from database
 export const fetchProduct = createAsyncThunk(
   "products/fetchProduct",
   async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/product`);
+      const res = await axios.get(`${baseUrl}/product`);
       return res.data;
     } catch (error) {
       throw error;

@@ -3,13 +3,14 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { deleteUser } from "../../components/Redux/viewUserSlice";
+import { baseUrl } from "../../components/Redux/ProductSlice";
 
 const UserDetails = ({ user }) => {
   const dispatch = useDispatch();
 
   const handleDelete = async (id) => {
     dispatch(deleteUser(id));
-    await axios.delete(`${process.env.REACT_APP_BASE_URL}/user/${id}`);
+    await axios.delete(`${baseUrl}/user/${id}`);
   };
 
   return (

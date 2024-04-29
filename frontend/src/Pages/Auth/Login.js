@@ -6,8 +6,7 @@ import loginSignup from "../../assest/login-animation.gif";
 import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
-
-  const { error, userLogin } = useLogin();
+  const { error, userLogin, isLoading } = useLogin();
   // Getting user data
   const [data, setData] = useState({
     email: "",
@@ -21,13 +20,12 @@ const Login = () => {
         ...prev,
         [name]: value,
       };
-    }); 
+    });
   };
   // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
     userLogin(data);
- 
   };
 
   //
@@ -83,11 +81,12 @@ const Login = () => {
           {error && <span className="text-red-500 text-center"> {error}</span>}
 
           <button
+            disabled={isLoading}
             type="submit"
             className="max-w-[120px] w-full bg-red-500 hover:bg-red-600
             cursor-pointer m-auto text-white py-1 rounded-full mt-4 text-center font-medium"
           >
-            Login
+            {isLoading ? "Login..." : "Login"}
           </button>
         </form>
         <p className="text-sm">
