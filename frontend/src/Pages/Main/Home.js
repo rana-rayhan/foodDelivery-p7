@@ -18,6 +18,7 @@ const Home = () => {
   );
   if (isLoading) {
     toast.success("Loading...", {
+      duration: 4000,
       style: {
         color: "#000",
         fontSize: "25px",
