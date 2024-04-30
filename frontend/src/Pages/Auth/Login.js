@@ -4,9 +4,11 @@ import { BiShow, BiHide } from "react-icons/bi";
 
 import loginSignup from "../../assest/login-animation.gif";
 import useLogin from "../../hooks/useLogin";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
-  const { error, userLogin, isLoading } = useLogin();
+  const { error, userLogin } = useLogin();
+  const [isLoading, setIsLoading] = useState(false);
   // Getting user data
   const [data, setData] = useState({
     email: "",
@@ -23,9 +25,12 @@ const Login = () => {
     });
   };
   // Handle form submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    userLogin(data);
+    setIsLoading(true);
+    await userLogin(data);
+    error && toast.error(error);
+    setIsLoading(false);
   };
 
   //
@@ -77,9 +82,6 @@ const Login = () => {
               {showPass ? <BiShow /> : <BiHide />}
             </span>
           </div>
-
-          {error && <span className="text-red-500 text-center"> {error}</span>}
-
           <button
             disabled={isLoading}
             type="submit"
@@ -99,6 +101,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
+      <Toaster />
     </div>
   );
 };

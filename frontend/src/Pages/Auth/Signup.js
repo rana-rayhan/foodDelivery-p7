@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiShow, BiHide } from "react-icons/bi";
+import toast, { Toaster } from "react-hot-toast";
 
 import loginSignup from "../../assest/login-animation.gif";
 import { ImageToBase64 } from "../../Utility/ImageToBase64";
@@ -51,11 +52,16 @@ const Signup = () => {
       if (password === confirmPassword) {
         singUp(data);
       } else {
-        console.log("Password is not match");
+        toast.error("Password is not match", {
+          duration: 4000,
+        });
       }
     } else {
-      console.log("Please input required value");
+      toast.error("Please input required value", {
+        duration: 4000,
+      });
     }
+    error && toast.error(error);
   };
 
   //
@@ -105,12 +111,6 @@ const Signup = () => {
           encType="multipart/form-data"
           className="w-full py-3 flex flex-col"
         >
-          {" "}
-          {error && (
-            <p className="flex justify-center items-center text-red-600">
-              {error}
-            </p>
-          )}
           <label htmlFor="firstname"> First Name:</label>
           <input
             onChange={handleData}
@@ -195,6 +195,7 @@ const Signup = () => {
           </Link>
         </p>
       </div>
+      <Toaster />
     </div>
   );
 };
